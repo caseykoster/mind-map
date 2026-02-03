@@ -4,17 +4,27 @@ import './App.css'
 const STORAGE_KEY = 'mindmap-data'
 
 const initialNodes = {
-  'root': { id: 'root', label: 'Modal Verbs', parentId: null, children: ['kunnen', 'moeten', 'mogen', 'willen', 'zullen'] },
-  'kunnen': { id: 'kunnen', label: 'KUNNEN', parentId: 'root', children: ['kunnen-child-placeholder'] },
-  'kunnen-child-placeholder': { id: 'kunnen-child-placeholder', label: 'TEST', parentId: 'kunnen', children: [] },
-  'moeten': { id: 'moeten', label: 'MOETEN', parentId: 'root', children: ['moeten-child-placeholder'] },
-  'moeten-child-placeholder': { id: 'moeten-child-placeholder', label: 'TEST', parentId: 'moeten', children: [] },
-  'mogen': { id: 'mogen', label: 'MOGEN', parentId: 'root', children: ['mogen-child-placeholder'] },
-  'mogen-child-placeholder': { id: 'mogen-child-placeholder', label: 'TEST', parentId: 'mogen', children: [] },
-  'willen': { id: 'willen', label: 'WILLEN', parentId: 'root', children: ['willen-child-placeholder'] },
-  'willen-child-placeholder': { id: 'willen-child-placeholder', label: 'TEST', parentId: 'willen', children: [] },
-  'zullen': { id: 'zullen', label: 'ZULLEN', parentId: 'root', children: ['zullen-child-placeholder'] },
-  'zullen-child-placeholder': { id: 'zullen-child-placeholder', label: 'TEST', parentId: 'zullen', children: [] },
+  'root': { id: 'root', label: 'Modale Werkwoorden', parentId: null, children: ['kunnen', 'moeten', 'mogen', 'willen', 'zullen'] },
+  'kunnen': { id: 'kunnen', label: 'KUNNEN', parentId: 'root', children: ['kunnen-conjugatie', 'kunnen-imperfectum'] },
+  
+  'kunnen-conjugatie': { id: 'kunnen-conjugatie', label: 'Conjugatie', parentId: 'kunnen', children: ['kunnen-conjugatie-svb', 'kunnen-conjugatie-uvb', 'kunnen-conjugatie-pvb'] },
+  'kunnen-conjugatie-svb': { id: 'kunnen-conjugatie-svb', label: 'ik/hij kan', parentId: 'kunnen-conjugatie', children: [] },
+  'kunnen-conjugatie-uvb': { id: 'kunnen-conjugatie-uvb', label: 'jij kunt', parentId: 'kunnen-conjugatie', children: [] },
+  'kunnen-conjugatie-pvb': { id: 'kunnen-conjugatie-pvb', label: 'wij/jullie/zij kunnen', parentId: 'kunnen-conjugatie', children: [] },
+  
+  'kunnen-imperfectum': { id: 'kunnen-imperfectum', label: 'Imperfectum', parentId: 'kunnen', children: [] },
+  'moeten': { id: 'moeten', label: 'MOETEN', parentId: 'root', children: ['moeten-conjugatie', 'moeten-imperfectum'] },
+  'moeten-conjugatie': { id: 'moeten-conjugatie', label: 'Conjugatie', parentId: 'moeten', children: [] },
+  'moeten-imperfectum': { id: 'moeten-imperfectum', label: 'Imperfectum', parentId: 'moeten', children: [] },
+  'mogen': { id: 'mogen', label: 'MOGEN', parentId: 'root', children: ['mogen-conjugatie', 'mogen-imperfectum'] },
+  'mogen-conjugatie': { id: 'mogen-conjugatie', label: 'Conjugatie', parentId: 'mogen', children: [] },
+  'mogen-imperfectum': { id: 'mogen-imperfectum', label: 'Imperfectum', parentId: 'mogen', children: [] },
+  'willen': { id: 'willen', label: 'WILLEN', parentId: 'root', children: ['willen-conjugatie', 'willen-imperfectum'] },
+  'willen-conjugatie': { id: 'willen-conjugatie', label: 'Conjugatie', parentId: 'willen', children: [] },
+  'willen-imperfectum': { id: 'willen-imperfectum', label: 'Imperfectum', parentId: 'willen', children: [] },
+  'zullen': { id: 'zullen', label: 'ZULLEN', parentId: 'root', children: ['zullen-conjugatie', 'zullen-imperfectum'] },
+  'zullen-conjugatie': { id: 'zullen-conjugatie', label: 'Conjugatie', parentId: 'zullen', children: [] },
+  'zullen-imperfectum': { id: 'zullen-imperfectum', label: 'Imperfectum', parentId: 'zullen', children: [] },
 }
 
 // remember to read this value at some point
@@ -39,7 +49,7 @@ function saveNodes(nodes) {
 }
 
 const CONFIG = {
-  nodeWidth: 120,
+  nodeWidth: 140,
   nodeHeight: 40,
   horizontalGap: 60,
   verticalGap: 16,
