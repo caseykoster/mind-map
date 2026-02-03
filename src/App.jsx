@@ -104,9 +104,17 @@ function getColor(nodes, nodeId, level) {
     }
   }
 
+  if (level === 2) {
+    return {
+      fill: branchColor.light + '40',
+      stroke: branchColor.base + '40',
+      text: branchColor.text
+    }
+  }
+
   return {
-    fill: branchColor.light + '40',
-    stroke: branchColor.base + '40',
+    fill: branchColor.light + '20',
+    stroke: branchColor.base + '20',
     text: branchColor.lightText
   }
 }
