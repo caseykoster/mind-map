@@ -71,7 +71,6 @@ const initialNodes = {
   'hoeven-imperfectum-pvb': { id: 'hoeven-imperfectum-pvb', label: 'wij/jullie/zij hoefden', parentId: 'hoeven-imperfectum', children: [] },
 }
 
-// remember to read this value at some point
 function loadNodes() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
@@ -279,7 +278,7 @@ function Connection({ fromPos, toPos }) {
 }
 
 function MindMap() {
-  const [nodes, setNodes] = useState(initialNodes)
+  const [nodes, setNodes] = useState(loadNodes)
   const [selectedId, setSelectedId] = useState(null)
 
   useEffect(() => {
