@@ -4,7 +4,8 @@ import './App.css'
 const STORAGE_KEY = 'mindmap-data'
 
 const initialNodes = {
-  'root': { id: 'root', label: 'Modale Werkwoorden', parentId: null, children: ['kunnen', 'moeten', 'mogen', 'willen', 'zullen'] },
+  'root': { id: 'root', label: 'Modale Werkwoorden', parentId: null, children: ['kunnen', 'moeten', 'mogen', 'willen', 'zullen', 'hoeven'] },
+  
   'kunnen': { id: 'kunnen', label: 'KUNNEN', parentId: 'root', children: ['kunnen-conjugatie', 'kunnen-imperfectum'] },
   
   'kunnen-conjugatie': { id: 'kunnen-conjugatie', label: 'Conjugatie', parentId: 'kunnen', children: ['kunnen-conjugatie-svb', 'kunnen-conjugatie-uvb', 'kunnen-conjugatie-pvb'] },
@@ -12,19 +13,62 @@ const initialNodes = {
   'kunnen-conjugatie-uvb': { id: 'kunnen-conjugatie-uvb', label: 'jij kunt', parentId: 'kunnen-conjugatie', children: [] },
   'kunnen-conjugatie-pvb': { id: 'kunnen-conjugatie-pvb', label: 'wij/jullie/zij kunnen', parentId: 'kunnen-conjugatie', children: [] },
   
-  'kunnen-imperfectum': { id: 'kunnen-imperfectum', label: 'Imperfectum', parentId: 'kunnen', children: [] },
+  'kunnen-imperfectum': { id: 'kunnen-imperfectum', label: 'Imperfectum', parentId: 'kunnen', children: ['kunnen-imperfectum-svb', 'kunnen-imperfectum-pvb'] },
+  'kunnen-imperfectum-svb': { id: 'kunnen-imperfectum-svb', label: 'ik/jij/hij kon', parentId: 'kunnen-imperfectum', children: [] },
+  'kunnen-imperfectum-pvb': { id: 'kunnen-imperfectum-pvb', label: 'wij/jullie/zij konden', parentId: 'kunnen-imperfectum', children: [] },
+
   'moeten': { id: 'moeten', label: 'MOETEN', parentId: 'root', children: ['moeten-conjugatie', 'moeten-imperfectum'] },
-  'moeten-conjugatie': { id: 'moeten-conjugatie', label: 'Conjugatie', parentId: 'moeten', children: [] },
-  'moeten-imperfectum': { id: 'moeten-imperfectum', label: 'Imperfectum', parentId: 'moeten', children: [] },
+  
+  'moeten-conjugatie': { id: 'moeten-conjugatie', label: 'Conjugatie', parentId: 'moeten', children: ['moeten-conjugatie-svb', 'moeten-conjugatie-pvb'] },
+  'moeten-conjugatie-svb': { id: 'moeten-conjugatie-svb', label: 'ik/jij/hij moet', parentId: 'moeten-conjugatie', children: [] },
+  'moeten-conjugatie-pvb': { id: 'moeten-conjugatie-pvb', label: 'wij/jullie/zij moeten', parentId: 'moeten-conjugatie', children: [] },
+
+  'moeten-imperfectum': { id: 'moeten-imperfectum', label: 'Imperfectum', parentId: 'moeten', children: ['moeten-imperfectum-svb', 'moeten-imperfectum-pvb'] },
+  'moeten-imperfectum-svb': { id: 'moeten-imperfectum-svb', label: 'ik/jij/hij moest', parentId: 'moeten-imperfectum', children: [] },
+  'moeten-imperfectum-pvb': { id: 'moeten-imperfectum-pvb', label: 'wij/jullie/zij moesten', parentId: 'moeten-imperfectum', children: [] },
+  
   'mogen': { id: 'mogen', label: 'MOGEN', parentId: 'root', children: ['mogen-conjugatie', 'mogen-imperfectum'] },
-  'mogen-conjugatie': { id: 'mogen-conjugatie', label: 'Conjugatie', parentId: 'mogen', children: [] },
-  'mogen-imperfectum': { id: 'mogen-imperfectum', label: 'Imperfectum', parentId: 'mogen', children: [] },
+  
+  'mogen-conjugatie': { id: 'mogen-conjugatie', label: 'Conjugatie', parentId: 'mogen', children: ['mogen-conjugatie-svb', 'mogen-conjugatie-pvb'] },
+  'mogen-conjugatie-svb': { id: 'mogen-conjugatie-svb', label: 'ik/jij/hij mag', parentId: 'mogen-conjugatie', children: [] },
+  'mogen-conjugatie-pvb': { id: 'mogen-conjugatie-pvb', label: 'wij/jullie/zij mogen', parentId: 'mogen-conjugatie', children: [] },
+  
+  'mogen-imperfectum': { id: 'mogen-imperfectum', label: 'Imperfectum', parentId: 'mogen', children: ['mogen-imperfectum-svb', 'mogen-imperfectum-pvb'] },
+  'mogen-imperfectum-svb': { id: 'mogen-imperfectum-svb', label: 'ik/jij/hij macht', parentId: 'mogen-imperfectum', children: [] },
+  'mogen-imperfectum-pvb': { id: 'mogen-imperfectum-pvb', label: 'wij/jullie/zij mochten', parentId: 'mogen-imperfectum', children: [] },
+
   'willen': { id: 'willen', label: 'WILLEN', parentId: 'root', children: ['willen-conjugatie', 'willen-imperfectum'] },
-  'willen-conjugatie': { id: 'willen-conjugatie', label: 'Conjugatie', parentId: 'willen', children: [] },
-  'willen-imperfectum': { id: 'willen-imperfectum', label: 'Imperfectum', parentId: 'willen', children: [] },
+  
+  'willen-conjugatie': { id: 'willen-conjugatie', label: 'Conjugatie', parentId: 'willen', children: ['willen-conjugatie-svb', 'willen-conjugatie-uvb', 'willen-conjugatie-pvb'] },
+  'willen-conjugatie-svb': { id: 'willen-conjugatie-svb', label: 'ik/hij wil', parentId: 'willen-conjugatie', children: [] },
+  'willen-conjugatie-uvb': { id: 'willen-conjugatie-uvb', label: 'jij wilt', parentId: 'willen-conjugatie', children: [] },
+  'willen-conjugatie-pvb': { id: 'willen-conjugatie-pvb', label: 'wij/jullie/zij willen', parentId: 'willen-conjugatie', children: [] },
+  
+  'willen-imperfectum': { id: 'willen-imperfectum', label: 'Imperfectum', parentId: 'willen', children: ['willen-imperfectum-svb', 'willen-imperfectum-pvb'] },
+  'willen-imperfectum-svb': { id: 'willen-imperfectum-svb', label: 'ik/jij/hij wilde/wou', parentId: 'willen-imperfectum', children: [] },
+  'willen-imperfectum-pvb': { id: 'willen-imperfectum-pvb', label: 'wij/jullie/zij wilden/wouden', parentId: 'willen-imperfectum', children: [] },
+  
   'zullen': { id: 'zullen', label: 'ZULLEN', parentId: 'root', children: ['zullen-conjugatie', 'zullen-imperfectum'] },
-  'zullen-conjugatie': { id: 'zullen-conjugatie', label: 'Conjugatie', parentId: 'zullen', children: [] },
-  'zullen-imperfectum': { id: 'zullen-imperfectum', label: 'Imperfectum', parentId: 'zullen', children: [] },
+  
+  'zullen-conjugatie': { id: 'zullen-conjugatie', label: 'Conjugatie', parentId: 'zullen', children: ['zullen-conjugatie-svb', 'zullen-conjugatie-uvb', 'zullen-conjugatie-pvb'] },
+  'zullen-conjugatie-svb': { id: 'zullen-conjugatie-svb', label: 'ik/hij zal', parentId: 'zullen-conjugatie', children: [] },
+  'zullen-conjugatie-uvb': { id: 'zullen-conjugatie-uvb', label: 'jij zult', parentId: 'zullen-conjugatie', children: [] },
+  'zullen-conjugatie-pvb': { id: 'zullen-conjugatie-pvb', label: 'wij/jullie/zij zullen', parentId: 'zullen-conjugatie', children: [] },
+
+  'zullen-imperfectum': { id: 'zullen-imperfectum', label: 'Imperfectum', parentId: 'zullen', children: ['zullen-imperfectum-svb', 'zullen-imperfectum-pvb'] },
+  'zullen-imperfectum-svb': { id: 'zullen-imperfectum-svb', label: 'ik/jij/hij zou', parentId: 'zullen-imperfectum', children: [] },
+  'zullen-imperfectum-pvb': { id: 'zullen-imperfectum-pvb', label: 'wij/jullie/zij zouden', parentId: 'zullen-imperfectum', children: [] },
+
+  'hoeven': { id: 'hoeven', label: 'HOEVEN', parentId: 'root', children: ['hoeven-conjugatie', 'hoeven-imperfectum'] },
+  
+  'hoeven-conjugatie': { id: 'hoeven-conjugatie', label: 'Conjugatie', parentId: 'hoeven', children: ['hoeven-conjugatie-svb','hoeven-conjugatie-uvb', 'hoeven-conjugatie-pvb'] },
+  'hoeven-conjugatie-svb': { id: 'hoeven-conjugatie-svb', label: 'ik hoef', parentId: 'hoeven-conjugatie', children: [] },
+  'hoeven-conjugatie-uvb': { id: 'hoeven-conjugatie-uvb', label: 'hij/jij hoeft', parentId: 'hoeven-conjugatie', children: [] },
+  'hoeven-conjugatie-pvb': { id: 'hoeven-conjugatie-pvb', label: 'wij/jullie/zij hoeven', parentId: 'hoeven-conjugatie', children: [] },
+
+  'hoeven-imperfectum': { id: 'hoeven-imperfectum', label: 'Imperfectum', parentId: 'hoeven', children: ['hoeven-imperfectum-svb', 'hoeven-imperfectum-pvb'] },
+  'hoeven-imperfectum-svb': { id: 'hoeven-imperfectum-svb', label: 'ik/jij/hij hoefde', parentId: 'hoeven-imperfectum', children: [] },
+  'hoeven-imperfectum-pvb': { id: 'hoeven-imperfectum-pvb', label: 'wij/jullie/zij hoefden', parentId: 'hoeven-imperfectum', children: [] },
 }
 
 // remember to read this value at some point
@@ -49,7 +93,7 @@ function saveNodes(nodes) {
 }
 
 const CONFIG = {
-  nodeWidth: 140,
+  nodeWidth: 180,
   nodeHeight: 40,
   horizontalGap: 60,
   verticalGap: 16,
